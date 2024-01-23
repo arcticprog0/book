@@ -80,6 +80,12 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/BookDto'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
   /book/{id}:
      get:
       tags:
@@ -100,6 +106,18 @@ paths:
             '*/*':
               schema:
                 $ref: '#/components/schemas/BookDto'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
      delete:
       tags:
         - book-controller
