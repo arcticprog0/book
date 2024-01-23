@@ -1,0 +1,223 @@
+openapi: 3.0.1
+info:
+  title: Books System Api
+  description: Book
+  contact:
+    name: Andrei K
+    url: https://github.com/arcticprog0
+    email: av7001@mail.ru
+  version: 1.0.0
+servers:
+  - url: http://localhost:7000
+    description: Server api
+paths:
+  /book:
+    get:
+      tags:
+        - book-controller
+      summary: Получить все книги
+      operationId: getAllBooks
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/BookDto'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+    put:
+      tags:
+        - book-controller
+      summary: Обновить книгу
+      operationId: updateBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+    post:
+      tags:
+        - book-controller
+      summary: Добавить книгу
+      operationId: addBook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BookDto'
+        required: true
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+  /book/{id}:
+     get:
+      tags:
+        - book-controller
+      summary: Получить книгу по id
+      operationId: getBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+     delete:
+      tags:
+        - book-controller
+      summary: Удалить книгу
+      operationId: deleteBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'            
+             
+  /book/action/take-book/{id}:
+    put:
+      tags:
+        - book-controller
+      summary: Взять книгу
+      operationId: updateTakeBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+  /book/action/return-book/{id}:
+    put:
+      tags:
+        - book-controller
+      summary: Вернуть книгу
+      operationId: updateReturnBook
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/BookDto'
+        '404':
+          description: Not Found
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'
+        '500':
+          description: Internal server error
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/ErrorBody'              
+components:
+  schemas:
+    BookDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id записи в БД
+          format: int64
+        name:
+          type: string
+          description: Наименование книги
+          example: Книга #1
+        available:
+          type: boolean
+          description: Признак доступности книги
+          example: true  
+      description: Модель книги
+    ErrorBody:
+      type: object
+      properties:
+        message:
+          type: string
+          description: Описание ошибки
+      description: Тело ошибки

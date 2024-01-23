@@ -1,0 +1,47 @@
+openapi: 3.0.1
+info:
+  title: library System Api
+  description: Library
+  contact:
+    name: Andrei K
+    url: http://localhost:7000
+    email: av7001@mail.ru
+  version: 1.0.0
+servers:
+  - url: http://localhost:7000
+    description: Generated server url
+paths:
+    /library/{id}:
+     get:
+      tags:
+        - library-controller
+      summary: Получить библиотеку по id
+      operationId: getLibrary
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: OK
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/LibraryDto'
+components:
+  schemas:
+    LibraryDto:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: Id записи в БД
+          format: int64
+        name:
+          type: string
+          description: Наименование библиотеки
+          example: Городская библиотека №1
+      description: Модель библиотеки
