@@ -8,7 +8,7 @@ info:
     email: av7001@mail.ru
   version: 1.0.0
 servers:
-  - url: http://localhost:7000
+  - url: http://localhost:7001
     description: Server api
 paths:
   /book:
@@ -208,7 +208,7 @@ components:
         name:
           type: string
           description: Наименование книги
-          example: Книга #1
+          example: Книга 21
         available:
           type: boolean
           description: Признак доступности книги

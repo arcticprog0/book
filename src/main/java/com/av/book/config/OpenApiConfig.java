@@ -6,8 +6,8 @@ import io.swagger.v3.oas.annotations.info.Info;
 
 @OpenAPIDefinition(
         info = @Info(
-                title = "Coffee machine System Api",
-                description = "Coffee machine", version = "1.0.0",
+                title = "Books System Api",
+                description = "Book", version = "1.0.0",
                 contact = @Contact(
                         name = "Andrei K",
                         email = "av7001@mail.ru",
